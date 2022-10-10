@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EggScript : MonoBehaviour
 {
     public float speed = 40f;
+    public HeroScript decreaseEggs;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,7 @@ public class EggScript : MonoBehaviour
 
     void OnBecameInvisible() {
         Destroy(this.gameObject);
+        decreaseEggs.decreaseNumEggs();
     }
 
     void OnTriggerEnter2D(Collider2D collision) {

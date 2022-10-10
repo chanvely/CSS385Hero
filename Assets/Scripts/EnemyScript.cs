@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -31,17 +33,25 @@ public class EnemyScript : MonoBehaviour
             Color losingColor = GetComponent<SpriteRenderer>().color;
             losingColor.a = energy * 0.008f;
             GetComponent<SpriteRenderer>().color = losingColor;
-
+            
             if (energy <= 0) {
                 // As soon as one enemy destroyed, new enemy will be created
                 Destroy(this.gameObject);
                 eManager.spawningNewEnemies();
+                eManager.destroyEnemies();
             }
+        }
+        else if (collision.gameObject.CompareTag("Player")) {
+            // As soon as one enemy destroyed, new enemy will be created
+            eManager.spawningNewEnemies();
+            Destroy(this.gameObject);
+            eManager.destroyEnemies();
         }
         else {
             // As soon as one enemy destroyed, new enemy will be created
             eManager.spawningNewEnemies();
             Destroy(this.gameObject);
         }
+    
     }
 }
